@@ -12,8 +12,8 @@ export default defineComponent ({
     <div class="tabbar-container w-100 p-fixed">
         <div class="tabbar dp-flex">
             <TabBarItem title="Home" icon="home" @click="$router.push({ name: 'home' });" />
-            <TabBarItem title="People" icon="prize" @click="$router.push({ name: 'people' });" />
-            <TabBarItem title="Settings" icon="me" @click="$router.push({ name: 'settings' });" />
+            <TabBarItem title="People" icon="people" @click="$router.push({ name: 'people' });" />
+            <TabBarItem title="Settings" icon="settings" @click="$router.push({ name: 'settings' });" />
         </div>
     </div>
 </template>
