@@ -1,12 +1,7 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent ({
-    data() {
-        return {
-            app_name: import.meta.env.VITE_APP_NAME,
-        }
-    },
-});
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const drawer = ref(false);
 </script>
 
 
@@ -14,10 +9,9 @@ export default defineComponent ({
     <div class="navbar-container w-100 p-fixed p-zero">
         <nav class="navbar-container p-relative">
             <div class="size-ruler align-center m-auto f-clear p-relative dp-flex">
-                <RouterLink to="/" class="logo-part dp-block align-center t-no-wrap">
-                    <div class="logo-img bg-center bg-cover dp-i-block v-middle"></div>
-                    <span class="app-title v-middle">{{ app_name }}</span>
-                </RouterLink>
+                <div class="logo-part dp-block align-center t-no-wrap" @click="drawer = true">
+                    <div class="expand bg-center bg-cover dp-i-block v-middle"></div>
+                </div>
                 <div class="opt-part dp-flex align-center">
                     <RouterLink to="/" class="search-btn t-center pointer">
                         <div class="search-icon dp-i-block bg-cover bg-center bg-no-repeat v-middle"></div>
@@ -26,6 +20,11 @@ export default defineComponent ({
             </div>
         </nav>
     </div>
+    <el-drawer v-model="drawer" title="Menu" :with-header="false" direction="ltr" size="50%">
+        <el-menu>
+            <el-menu-item index="1">Some Long Option Name</el-menu-item>
+        </el-menu>
+    </el-drawer>
 </template>
 
 <style scoped>
@@ -47,12 +46,12 @@ export default defineComponent ({
     color: #272727;
 }
 
-.navbar-container .logo-part .logo-img {
+.navbar-container .logo-part .expand {
     width: 2.16667rem;
     height: 2.16667rem;
     margin-right: .66667rem;
     border-radius: 4px;
-    background-image: url('/img/wsicon.png');
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBVcGxvYWRlZCB0bzogU1ZHIFJlcG8sIHd3dy5zdmdyZXBvLmNvbSwgR2VuZXJhdG9yOiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIGZpbGw9IiMwMDAwMDAiIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgDQoJIHdpZHRoPSI4MDBweCIgaGVpZ2h0PSI4MDBweCIgdmlld0JveD0iMCAwIDEyNCAxMjQiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZD0iTTExMiw2SDEyQzUuNCw2LDAsMTEuNCwwLDE4czUuNCwxMiwxMiwxMmgxMDBjNi42LDAsMTItNS40LDEyLTEyUzExOC42LDYsMTEyLDZ6Ii8+DQoJPHBhdGggZD0iTTExMiw1MEgxMkM1LjQsNTAsMCw1NS40LDAsNjJjMCw2LjYsNS40LDEyLDEyLDEyaDEwMGM2LjYsMCwxMi01LjQsMTItMTJDMTI0LDU1LjQsMTE4LjYsNTAsMTEyLDUweiIvPg0KCTxwYXRoIGQ9Ik0xMTIsOTRIMTJjLTYuNiwwLTEyLDUuNC0xMiwxMnM1LjQsMTIsMTIsMTJoMTAwYzYuNiwwLDEyLTUuNCwxMi0xMlMxMTguNiw5NCwxMTIsOTR6Ii8+DQo8L2c+DQo8L3N2Zz4=);
 }
 
 .navbar-container .opt-part {

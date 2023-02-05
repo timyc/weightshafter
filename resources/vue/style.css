@@ -465,3 +465,7 @@ ol, ul {
   font-size: 1.33333rem;
   box-sizing: border-box;
 }
+
+.el-drawer__body {
+  padding: 0;
+}
