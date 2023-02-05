@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/home/slides', [App\Http\Controllers\HomeController::class, 'getSlides']);
+
 # Vue Routes
 
 Route::get('/{any?}', [App\Http\Controllers\SPAController::class, 'index'])->where('any', '(.*)');

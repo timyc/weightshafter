@@ -2,6 +2,7 @@
 import Navbar from '@/components/Navbar.vue';
 import Tabbar from '@/components/Tabbar.vue';
 import Slider from '@/components/home/Slider.vue';
+import DailyHealth from '@/components/home/DailyHealth.vue';
 </script>
 
 <template>
@@ -9,7 +10,14 @@ import Slider from '@/components/home/Slider.vue';
         <div class="home-container">
             <Navbar />
             <Slider />
+            <DailyHealth />
             <Tabbar />
         </div>
     </div>
 </template>
+
+<style scoped>
+.home-container {
+    padding: 0 10px;
+}
+</style>

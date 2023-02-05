@@ -1,16 +1,25 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+interface Slide {
+    id: number;
+    image: string;
+    href: string;
+}
+
 const modules = [Pagination, Autoplay];
 const loading = ref(true);
-setTimeout(() => {
+const slides = ref([] as Slide[]);
+
+axios.get('/home/slides').then((response) => {
     loading.value = false;
-}, 1500);
+    slides.value = response.data;
+});
 </script>
 
 <template>
@@ -23,34 +32,17 @@ setTimeout(() => {
                 <swiper class="swiper-container p-relative swiper-container-horizontal" :spaceBetween="30"
                     :pagination="true" :modules="modules" :loop="true"
                     :autoplay="{ delay: 2500, disableOnInteraction: false, }">
-                    <swiper-slide class="swiper-wrapper banner-item p-relative ts-dot-4 border-box over-hidden">
+                    <swiper-slide class="swiper-wrapper banner-item p-relative ts-dot-4 border-box over-hidden" v-for="slide of slides" :index="slide.id">
                         <div class="banner-container bg-no-repeat bg-cover bg-center p-relative">
-                            <a href="#">
+                            <a :href="slide.href">
                                 <div class="banner-img w-100 h-100 p-absolute p-zero bg-cover bg-center"
-                                    :style="'background-image: url(/img/banners/banner_fitness1.jpg);'"></div>
-                            </a>
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide class="swiper-wrapper banner-item p-relative ts-dot-4 border-box over-hidden">
-                        <div class="banner-container bg-no-repeat bg-cover bg-center p-relative">
-                            <a href="#">
-                                <div class="banner-img w-100 h-100 p-absolute p-zero bg-cover bg-center"
-                                    :style="'background-image: url(/img/banners/banner_fitness2.jpg);'"></div>
-                            </a>
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide class="swiper-wrapper banner-item p-relative ts-dot-4 border-box over-hidden">
-                        <div class="banner-container bg-no-repeat bg-cover bg-center p-relative">
-                            <a href="#">
-                                <div class="banner-img w-100 h-100 p-absolute p-zero bg-cover bg-center"
-                                    :style="'background-image: url(/img/banners/banner_fitness3.jpg);'"></div>
+                                    :style="`background-image: url(/img/banners/${slide.image});`"></div>
                             </a>
                         </div>
                     </swiper-slide>
                 </swiper>
             </template>
         </el-skeleton>
-
     </div>
 </template>
 
