@@ -9,11 +9,26 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
-    /*{
-      path: "/other",
-      name: "other",
-      component: () => import("../views/OtherView.vue"),
-    },*/
+    {
+      path: "/auth",
+      name: "auth",
+      component: () => import("../views/AuthView.vue"),
+    },
+    {
+      path: "/people",
+      name: "people",
+      component: () => import("../views/PeopleView.vue"),
+    },
+    {
+      path: "/messages",
+      name: "messages",
+      component: () => import("../views/MessagesView.vue"),
+    },
+    {
+      path: "/settings",
+      name: "settings",
+      component: () => import("../views/SettingsView.vue"),
+    },
   ],
 });
 

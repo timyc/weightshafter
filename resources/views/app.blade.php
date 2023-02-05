@@ -10,7 +10,7 @@
     <script>
         window.userID = "{{ auth()->id() }}" || null;
     </script>
-    @vite(['resources/sass/app.scss', 'resources/vue/main.ts'])
+    @vite(['resources/vue/main.ts'])
 </head>
 <body>
     <div id="app"></div>
