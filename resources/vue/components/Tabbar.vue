@@ -1,9 +1,9 @@
 <script lang="ts">
-import TabBarItem from './items/TabbarItem.vue';
+import TabbarItem from './items/TabbarItem.vue';
 import { defineComponent } from "vue";
 export default defineComponent ({
     components: {
-        TabBarItem,
+        TabbarItem,
     }
 });
 </script>
@@ -11,9 +11,9 @@ export default defineComponent ({
 <template>
     <div class="tabbar-container w-100 p-fixed">
         <div class="tabbar dp-flex">
-            <TabBarItem title="Home" icon="home" @click="$router.push({ name: 'home' });" />
-            <TabBarItem title="People" icon="people" @click="$router.push({ name: 'people' });" />
-            <TabBarItem title="Settings" icon="settings" @click="$router.push({ name: 'settings' });" />
+            <TabbarItem title="Home" icon="home" @click="$router.push({ name: 'home' });" />
+            <TabbarItem title="People" icon="people" @click="$router.push({ name: 'people' });" />
+            <TabbarItem title="Settings" icon="settings" @click="$router.push({ name: 'settings' });" />
         </div>
     </div>
 </template>
@@ -25,6 +25,6 @@ export default defineComponent ({
     height: 4.16667rem;
     background: #fff;
     border-top: 1px solid #c8c8c8;
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: 0;
 }
 </style>
