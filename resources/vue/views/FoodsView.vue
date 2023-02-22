@@ -1,8 +1,16 @@
 <script setup lang="ts">
-// import axios
-// do API call to some food API
+  import Navbar from '@/components/Navbar.vue';
+  import Tabbar from '@/components/Tabbar.vue';
+  import FoodPlan from '@/components/food/FoodPlan.vue';
+
 </script>
 
 <template>
-
-</template>
+    <div class="app-container with-navbar">
+        <div class="home-container">
+            <Navbar />
+            <Tabbar />
+            <FoodPlan />
+        </div>
+    </div>
+  </template>

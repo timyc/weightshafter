@@ -16,7 +16,7 @@ const register = async () => {
     };
     axios.post('/register', data)
         .then().catch(errorResponse => {
-            
+            ElMessage.error(errorResponse.response.data.message);
         }).finally(() => {
             
         });

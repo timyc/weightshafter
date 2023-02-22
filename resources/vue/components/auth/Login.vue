@@ -12,7 +12,7 @@ const login = async () => {
     };
     axios.post('/login', data)
         .then().catch(errorResponse => {
-            
+            ElMessage.error(errorResponse.response.data.message);
         }).finally(() => {
             
         });
