@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { ElLoading, ElMessage } from 'element-plus';
+const emit = defineEmits(['swap']);
 const username = ref('');
 const password = ref('');
 const login = async () => {
@@ -59,7 +60,7 @@ const login = async () => {
                 </el-divider>
             </el-col>
             <el-col :span="24">
-                <el-button type="default" style="margin:auto;width:100%">Register</el-button>
+                <el-button type="default" style="margin:auto;width:100%" @click="$emit('swap')">Register</el-button>
             </el-col>
         </el-row>
     </el-form>
