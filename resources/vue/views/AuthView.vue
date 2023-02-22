@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Login from '@/components/auth/Login.vue';
+import Register from '@/components/auth/Register.vue';
+const curAction = ref(true);
 </script>
 
 <template>
     <div class="app-container">
         <div class="auth-container">
-            <Login />
+            <el-image class="a-move-in-bottom" src="/img/wsblack.png" />
+            <Login v-if="curAction" @swap="curAction = false" />
+            <Register v-else @swap="curAction = true" />
         </div>
 
     </div>
