@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/session', function () {
+    return auth()->id() ? auth()->id() : -1;
+});
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return response()->json(['msg' => 'Logged out']);
+});
+
 Route::get('/home/slides', [App\Http\Controllers\HomeController::class, 'getSlides']);
 
 # Vue Routes

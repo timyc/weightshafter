@@ -1,5 +1,14 @@
 <script setup lang="ts">
-
+import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { useUserStore } from '@/stores/user';
+const userStore = useUserStore();
+const router = useRouter();
+onMounted(() => {
+    if (!userStore.loggedIn) {
+        router.push('/auth');
+    }
+});
 </script>
 
 

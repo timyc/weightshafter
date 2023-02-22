@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { ElLoading, ElMessage } from 'element-plus';
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user';
 import axios from 'axios';
+const router = useRouter();
+const userStore = useUserStore();
 const emit = defineEmits(['swap']);
 const email = ref('');
 const password = ref('');
@@ -14,9 +18,23 @@ const login = async () => {
         .then().catch(errorResponse => {
             ElMessage.error(errorResponse.response.data.message);
         }).finally(() => {
-            
+            axios.get('/session')
+                .then(response => {
+                    if (response.data > 0) {
+                        window["userID"] = response.data;
+                        userStore.loggedIn = true;
+                        setTimeout(() => {
+                            router.push('/');
+                        }, 1000);
+                    }
+                });
         });
 };
+onMounted(() => {
+    if (userStore.loggedIn) {
+        router.push('/');
+    }
+});
 </script>
 
 <template>

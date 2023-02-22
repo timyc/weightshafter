@@ -2,6 +2,10 @@
 import { ref } from 'vue';
 import { ElLoading, ElMessage } from 'element-plus';
 import axios from 'axios';
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user';
+const router = useRouter()
+const userStore = useUserStore();
 const emit = defineEmits(['swap']);
 const name = ref('');
 const email = ref('');
@@ -12,13 +16,22 @@ const register = async () => {
         name: name.value,
         email: email.value,
         password: password.value,
-        password_confirm: password_confirm.value
+        password_confirmation: password_confirm.value
     };
     axios.post('/register', data)
         .then().catch(errorResponse => {
             ElMessage.error(errorResponse.response.data.message);
         }).finally(() => {
-            
+            axios.get('/session')
+                .then(response => {
+                    if (response.data > 0) {
+                        window["userID"] = response.data;
+                        userStore.loggedIn = true;
+                        setTimeout(() => {
+                            router.push('/');
+                        }, 1000);
+                    }
+                });
         });
 };
 </script>

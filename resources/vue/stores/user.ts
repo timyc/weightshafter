@@ -31,5 +31,6 @@ export const useUserStore = defineStore("userStore", {
         disconnectEcho() {
             window.Echo.disconnect();
         },
-    }
+    },
+    persist: true,
 });
