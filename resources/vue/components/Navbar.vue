@@ -1,7 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
+import axios from 'axios';
+import { useUserStore } from '@/stores/user';
+import { useRouter } from 'vue-router';
 const drawer = ref(false);
+const userStore = useUserStore();
+const router = useRouter();
+const logout = () => {
+    axios.post('/logout').then(response => {
+        userStore.$reset();
+        router.push('/auth');
+    });
+}
 </script>
 
 
@@ -23,7 +33,7 @@ const drawer = ref(false);
     <el-drawer v-model="drawer" title="Menu" :with-header="false" direction="ltr" size="50%">
         <el-menu>
             <el-menu-item index="1">Some Long Option Name</el-menu-item>
-            <el-menu-item index="100">Logout</el-menu-item>
+            <el-menu-item index="100" @click="logout">Logout</el-menu-item>
         </el-menu>
     </el-drawer>
 </template>
