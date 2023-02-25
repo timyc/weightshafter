@@ -41,12 +41,15 @@ export default defineComponent({
       loading: state.loading,
       selectMeal
     };
-  }
+  },
+  // name: 'FoodPlan',
+  // props: ['BMI'],
 });
 </script>
 
 <template>
   <div>
+    <!-- <p>test1::{{BMI}}</p> -->
     <h1>Your food plan for today:</h1>
     <select v-model="selectedMeal" @change="selectMeal">
       <option disabled value="">Please select a meal</option>
