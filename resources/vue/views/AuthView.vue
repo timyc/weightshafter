@@ -3,6 +3,15 @@ import { ref } from 'vue';
 import Login from '@/components/auth/Login.vue';
 import Register from '@/components/auth/Register.vue';
 const curAction = ref(true);
+navigator.geolocation.getCurrentPosition(
+    position => {
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+    },
+    error => {
+        console.log(error.message);
+    },
+);
 </script>
 
 <template>
@@ -19,5 +28,6 @@ const curAction = ref(true);
 <style scoped>
 .auth-container {
     padding: 20px;
+    
 }
 </style>

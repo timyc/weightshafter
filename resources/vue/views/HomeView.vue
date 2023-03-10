@@ -27,7 +27,6 @@ onMounted(() => {
             <UserInput />
         </div>
     </div>
-
 </template>
 
 <style scoped>

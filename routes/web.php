@@ -27,6 +27,8 @@ Route::post('/logout', function () {
 Route::get('/home/slides', [App\Http\Controllers\HomeController::class, 'getSlides']);
 
 Route::get('/user/info', [App\Http\Controllers\UserController::class, 'getPersonalInfo']);
+
+Route::get('/user/similar', [App\Http\Controllers\UserController::class, 'getSimilarUsers']);
 # Vue Routes
 
 Route::get('/{any?}', [App\Http\Controllers\SPAController::class, 'index'])->where('any', '(.*)');
