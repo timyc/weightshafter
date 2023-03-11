@@ -18,7 +18,7 @@ axios.get('/user/similar').then(res => {
 
 <template>
     <h1 style="text-align:center">People Like You</h1>
-    <el-card class="person-card" v-for="person of people" :key="person.id" @click="emit('goChatting', person.id)">
+    <el-card class="person-card" v-for="person of people" :key="person.id" @click="emit('goChatting', person.id, person.avatar, person.name)">
         <div class="user-info">
             <el-row :gutter="10">
                 <el-col :span="8">

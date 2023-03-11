@@ -9,9 +9,28 @@ declare global {
     }
 }
 
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+    height: number;
+    weight: number;
+    gender: string;
+}
+
+export interface ChatMessage {
+    id: number;
+    sender_id: number;
+    receiver_id: number;
+    message: string;
+}
+
 export const useUserStore = defineStore("userStore", {
     state: () => ({
         loggedIn: false,
+        info: {} as User,
+        messages: [] as ChatMessage[],
     }),
     actions: {
         initEcho() {
@@ -27,9 +46,11 @@ export const useUserStore = defineStore("userStore", {
                 forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
                 enabledTransports: ['ws', 'wss'],
             });
+            console.log('Echo initialized');
         },
         disconnectEcho() {
             window.Echo.disconnect();
+            console.log('Echo disconnected');
         },
     },
     persist: true,

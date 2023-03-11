@@ -22,12 +22,14 @@ const register = async () => {
         .then().catch(errorResponse => {
             ElMessage.error(errorResponse.response.data.message);
         }).finally(() => {
-            axios.get('/session')
+            axios.get('/user/info')
                 .then(response => {
                     if (response.data > 0) {
-                        window["userID"] = response.data;
+                        window["userID"] = response.data.id;
+                        userStore.info = response.data;
                         userStore.loggedIn = true;
                         setTimeout(() => {
+                            userStore.initEcho();
                             router.push('/');
                         }, 1000);
                     }

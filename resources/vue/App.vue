@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
+import { useUserStore } from "@/stores/user";
+const userStore = useUserStore();
+if (userStore.loggedIn) {
+    userStore.initEcho();
+}
 </script>
 
 <template>
-<RouterView />
+    <RouterView />
 </template>
