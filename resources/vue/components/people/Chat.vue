@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useUserStore } from '@/stores/user';
 const props = defineProps({
@@ -18,12 +18,14 @@ const sendMessage = async () => {
     axios.post('/messages/send', data)
         .then(response => {
             message.value = '';
+            scrollBottom();
             //userStore.messages.push(response.data);
         });
 };
 axios.post('/messages', { id: props.chatee })
     .then(response => {
         userStore.messages = response.data.messages;
+        scrollBottom();
     });
 (window.Echo as any).private('user.' + userStore.info.id).subscribed(() => {
     console.log(`uid: ${userStore.info.id}`);
@@ -37,6 +39,10 @@ axios.post('/messages', { id: props.chatee })
             break;
     }
 });
+function scrollBottom() {
+    let chatWindow = document.querySelector('.chat-window');
+    chatWindow!.scrollTop = chatWindow!.scrollHeight;
+}
 </script>
 
 <template>
@@ -75,18 +81,16 @@ axios.post('/messages', { id: props.chatee })
                     </el-col>
                 </template>
             </el-row>
-
-            <!-- Bottom bar with input box -->
-            <el-row class="bottom-bar" :gutter="10">
-                <el-col :span="20">
-                    <el-input placeholder="Type your message here" v-model="message" />
-                </el-col>
-                <el-col :span="4">
-                    <el-button @click="sendMessage">Send</el-button>
-                </el-col>
-            </el-row>
         </div>
-
+        <!-- Bottom bar with input box -->
+        <el-row class="bottom-bar" :gutter="10">
+            <el-col :span="20">
+                <el-input placeholder="Type your message here" v-model="message" />
+            </el-col>
+            <el-col :span="4">
+                <el-button @click="sendMessage">Send</el-button>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -105,6 +109,8 @@ axios.post('/messages', { id: props.chatee })
 
 .chat-window {
     margin-top: 10px;
+    height: 90%;
+    overflow: scroll;
 }
 
 .chat-body {
