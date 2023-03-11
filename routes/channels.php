@@ -17,3 +17,7 @@ Broadcast::channel('user.{id}', function ($user, $id) {
     // check if session character matches the id
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('public', function ($user) {
+    return $user;
+});

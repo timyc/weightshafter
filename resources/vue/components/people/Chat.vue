@@ -25,7 +25,6 @@ axios.post('/messages', { id: props.chatee })
     .then(response => {
         userStore.messages = response.data.messages;
     });
-console.log(userStore.info.id);
 (window.Echo as any).private('user.' + userStore.info.id).subscribed(() => {
     console.log(`uid: ${userStore.info.id}`);
 }).listenToAll((event: string, data: any) => {
@@ -33,7 +32,9 @@ console.log(userStore.info.id);
         console.log(event, data);
     }
     switch (event) {
-
+        case 'SendMessage':
+            userStore.messages.push(data.data);
+            break;
     }
 });
 </script>
