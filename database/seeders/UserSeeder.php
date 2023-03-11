@@ -17,6 +17,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         $faker = app(Generator::class);
-        \App\Models\User::factory(10000)->create();
+        \App\Models\User::factory(50000)->create();
     }
 }

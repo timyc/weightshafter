@@ -26,10 +26,11 @@ class UserController extends Controller
         $bmi = $weight / pow($height, 2);
         $bmiMin = $bmi * 0.9;
         $bmiMax = $bmi * 1.1;
-        $results = DB::select('SELECT id, name, avatar, gender, (weight / (height * height)) as bmi FROM users WHERE ST_Distance_Sphere(location, POINT(?, ?)) < 10000 AND (weight / (height * height)) BETWEEN ? AND ? AND id != ? ORDER BY (gender=?) DESC', [$request->user()->location->longitude, $request->user()->location->latitude, $bmiMin, $bmiMax, $request->user()->id, $request->user()->gender]);
+        // Let's limit the results to 50 to avoid overloading the server
+        $results = DB::select('SELECT id, name, avatar, gender, (weight / (height * height)) as bmi FROM users WHERE ST_Distance_Sphere(location, POINT(?, ?)) < 10000 AND (weight / (height * height)) BETWEEN ? AND ? AND id != ? ORDER BY (gender=?) DESC LIMIT 50', [$request->user()->location->longitude, $request->user()->location->latitude, $bmiMin, $bmiMax, $request->user()->id, $request->user()->gender]);
         
-        // return the top 25% of the results
-        //if (count($results) > 4) $results = array_slice($results, 0, count($results) / 4);
+        // return the top 20% of the results
+        $results = array_slice($results, 0, count($results) / 5);
         
         return response()->json($results);
     }
