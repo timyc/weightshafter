@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import axios from 'axios';
 import { useUserStore } from '@/stores/user';
 const props = defineProps({
@@ -27,17 +27,22 @@ axios.post('/messages', { id: props.chatee })
         userStore.messages = response.data.messages;
         scrollBottom();
     });
-(window.Echo as any).private('user.' + userStore.info.id).subscribed(() => {
-    console.log(`uid: ${userStore.info.id}`);
-}).listenToAll((event: string, data: any) => {
-    if (import.meta.env.VITE_APP_ENV === 'local') {
-        console.log(event, data);
-    }
-    switch (event) {
-        case 'SendMessage':
-            userStore.messages.push(data.data);
-            break;
-    }
+onMounted(() => {
+    (window.Echo as any).private('user.' + userStore.info.id).subscribed(() => {
+        console.log(`uid: ${userStore.info.id}`);
+    }).listenToAll((event: string, data: any) => {
+        if (import.meta.env.VITE_APP_ENV === 'local') {
+            console.log(event, data);
+        }
+        switch (event) {
+            case 'SendMessage':
+                userStore.messages.push(data.data);
+                break;
+        }
+    });
+});
+onUnmounted(() => {
+    (window.Echo as any).private('user.' + userStore.info.id).stopListening();
 });
 function scrollBottom() {
     let chatWindow = document.querySelector('.chat-window');

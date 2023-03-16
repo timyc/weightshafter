@@ -34,4 +34,16 @@ class UserController extends Controller
         
         return response()->json($results);
     }
+
+    //test
+    public function setUserWeight($id, $weight) {
+        DB::update('UPDATE users SET weight = ? WHERE id = ?', [$weight, $id]);
+        // register endpoint
+    }
+
+    public function setUserHeight($id, $height) {
+        DB::update('UPDATE users SET height = ? WHERE id = ?', [$height, $id]);
+        // register endpoint
+    }
+    //test
 }

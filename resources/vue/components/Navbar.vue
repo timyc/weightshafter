@@ -32,7 +32,6 @@ const logout = () => {
     </div>
     <el-drawer v-model="drawer" title="Menu" :with-header="false" direction="ltr" size="50%">
         <el-menu>
-            <el-menu-item index="1">Some Long Option Name</el-menu-item>
             <el-menu-item index="100" @click="logout">Logout</el-menu-item>
         </el-menu>
     </el-drawer>
