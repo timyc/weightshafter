@@ -55,7 +55,7 @@ function assessBMI(bmi: number){
 function sentBMI(ht: number, wt: number){
   // var temp = axios.get('/user/info') 
   //, {params: {weight: '88', height: '97'}}
-  let url: string = "/user/put/weightandheight/" + wt + "/" + ht;
+  let url: string = "/user/put/weightandheight/" + wt + "/" + ht/100;
   axios.put(url);
 }
 
