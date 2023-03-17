@@ -36,14 +36,31 @@ class UserController extends Controller
     }
 
     //test
-    public function setUserWeight($id, $weight) {
-        DB::update('UPDATE users SET weight = ? WHERE id = ?', [$weight, $id]);
-        // register endpoint
-    }
+    // public function setUserWeight($id, $weight) {
+    //     // echo "test setUserWeight" . $id . " and " . $weight;
+    //     DB::update('UPDATE users SET weight = ? WHERE id = ?', [$weight, $id]);
+    //     // register endpoint
+    //     return "test::UserID:: " . $id . " Weight:: " . $weight;
+    //     // return $id;//$result;
+    // }
 
-    public function setUserHeight($id, $height) {
-        DB::update('UPDATE users SET height = ? WHERE id = ?', [$height, $id]);
-        // register endpoint
+    // public function setUserHeight($id, $height) {
+    //     // echo "test setUserHeight" . $id . " and " . $height;
+    //     DB::update('UPDATE users SET height = ? WHERE id = ?', [$height, $id]);
+    //     // // register endpoint
+    //     // return "test setUserHeight" . $id . " and " . $height;
+    //     return "test::UserID:: " . $id . ", Height:: " . $height;
+    // }
+    public function putUserWeightAndHeight(Request $request, $weight, $height) {
+        // echo "test setUserWeight" . $id . " and " . $weight;
+        DB::update('UPDATE users SET weight = ?, height = ? WHERE id = ?', 
+            [$weight, $height, $request->user()->id]);
+
+        return "test::UserID:: " . $request->user()->id . " Weight:: " . $weight. " Height:: " . $height;
+        // return $id;//$result;
     }
-    //test
+    // public function putTest(Request $request, $id, $height) {
+    //     return $id . " and " . $height;
+    // }
+    //
 }

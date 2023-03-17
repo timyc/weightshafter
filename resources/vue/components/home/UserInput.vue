@@ -2,6 +2,7 @@
 import FoodPlan from '@/components/food/FoodPlan.vue';
 import { getOffsetTopDistance } from 'element-plus/es/utils';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 const router = useRouter();
 function getFood(){
     router.push('/foods');
@@ -51,8 +52,11 @@ function assessBMI(bmi: number){
         return "Obese";
     }
 }
-function sentBMI(){
-    
+function sentBMI(ht: number, wt: number){
+  // var temp = axios.get('/user/info') 
+  //, {params: {weight: '88', height: '97'}}
+  let url: string = "/user/put/weightandheight/" + wt + "/" + ht;
+  axios.put(url);
 }
 
 </script>
@@ -79,7 +83,7 @@ function sentBMI(){
             You are considered to be: <span class="result-value">{{assessBMI(getBMI(ht, wt))}}</span>
           </p>
         </div>
-        <button @click="sentBMI(); getFood()" :disabled="!(ht && wt)">Get Food Recommendations</button>
+        <button @click="sentBMI(ht, wt); getFood();" :disabled="!(ht && wt)">Get Food Recommendations</button>
       </div>
     </div>
 </template>

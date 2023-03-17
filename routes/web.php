@@ -35,4 +35,17 @@ Route::post('/messages', [App\Http\Controllers\ChatController::class, 'fetchMess
 Route::post('/messages/send', [App\Http\Controllers\ChatController::class, 'sendMessage']);
 # Vue Routes
 
+// test
+// Route::put('/user/test/{id}/{height}', [App\Http\Controllers\UserController::class, 'putTest']);
+// Route::get('/user/set/weight/{id}/{weight}', [App\Http\Controllers\UserController::class, 'setUserWeight']);
+// Route::get('/user/set/height/{id}/{height}', [App\Http\Controllers\UserController::class, 'setUserHeight']);
+//
+Route::put('/user/put/weightandheight/{weight}/{height}', [App\Http\Controllers\UserController::class, 'putUserWeightAndHeight']);
+
+
 Route::get('/{any?}', [App\Http\Controllers\SPAController::class, 'index'])->where('any', '(.*)');
+
+
+
+
+
