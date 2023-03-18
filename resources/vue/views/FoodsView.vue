@@ -2,6 +2,7 @@
   import Navbar from '@/components/Navbar.vue';
   import Tabbar from '@/components/Tabbar.vue';
   import FoodPlan from '@/components/food/FoodPlan.vue';
+  import FoodRecommend from '@/components/food/FoodRecommend.vue';
 
 </script>
 
@@ -10,7 +11,8 @@
         <div class="home-container">
             <Navbar />
             <Tabbar />
-            <FoodPlan />
+            <!-- <FoodPlan /> -->
+            <FoodRecommend />
         </div>
     </div>
   </template>
