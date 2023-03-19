@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
+import axios from 'axios';
 
 declare global {
     interface Window {
@@ -47,6 +48,25 @@ export const useUserStore = defineStore("userStore", {
                 enabledTransports: ['ws', 'wss'],
             });
             console.log('Echo initialized');
+            setInterval(() => {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        console.log(position.coords.latitude);
+                        console.log(position.coords.longitude);
+                        axios.post('/user/location', {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                        }).then(response => {
+                            console.log('User location updated');
+                        }).catch(error => {
+                            console.log('Error updating location');
+                        });
+                    },
+                    error => {
+                        console.log(error.message);
+                    },
+                );
+            }, 10000);
         },
         disconnectEcho() {
             window.Echo.disconnect();

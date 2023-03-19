@@ -35,6 +35,18 @@ class UserController extends Controller
         return response()->json($results);
     }
 
+    public function updateUserLocation(Request $request) {
+        $user = User::find($request->user()->id);
+        $user->location = DB::raw("POINT($request->longitude, $request->latitude)");
+        $user->save();
+        return response()->json($user);
+    }
+
+    public function searchUsersByName(Request $request) {
+        $users = User::where('name', 'like', '%' . $request->name . '%')->limit(10)->get();
+        return response()->json($users);
+    }
+
     //test
     // public function setUserWeight($id, $weight) {
     //     // echo "test setUserWeight" . $id . " and " . $weight;

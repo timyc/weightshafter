@@ -42,7 +42,7 @@ onMounted(() => {
     });
 });
 onUnmounted(() => {
-    (window.Echo as any).private('user.' + userStore.info.id).stopListening();
+    window.Echo.leave(`user.${userStore.info.id}`);
 });
 function scrollBottom() {
     let chatWindow = document.querySelector('.chat-window');

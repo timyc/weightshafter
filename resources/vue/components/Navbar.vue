@@ -23,7 +23,7 @@ const logout = () => {
                     <div class="expand bg-center bg-cover dp-i-block v-middle"></div>
                 </div>
                 <div class="opt-part dp-flex align-center">
-                    <RouterLink to="/" class="search-btn t-center pointer">
+                    <RouterLink to="/search" class="search-btn t-center pointer">
                         <div class="search-icon dp-i-block bg-cover bg-center bg-no-repeat v-middle"></div>
                     </RouterLink>
                 </div>

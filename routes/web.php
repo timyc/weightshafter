@@ -33,6 +33,10 @@ Route::get('/user/similar', [App\Http\Controllers\UserController::class, 'getSim
 Route::post('/messages', [App\Http\Controllers\ChatController::class, 'fetchMessages']);
 
 Route::post('/messages/send', [App\Http\Controllers\ChatController::class, 'sendMessage']);
+
+Route::post('/user/location', [App\Http\Controllers\UserController::class, 'updateUserLocation']);
+
+Route::get('/user/search', [App\Http\Controllers\UserController::class, 'searchUsersByName']);
 # Vue Routes
 
 // test
