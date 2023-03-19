@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import Navbar from '@/components/Navbar.vue';
 import Tabbar from '@/components/Tabbar.vue';
 import Listing from '@/components/people/Listing.vue';
 import Chat from '@/components/people/Chat.vue';
-const chatting = ref(false);
-const chatee = ref(0);
-const avatar = ref('');
-const name = ref('');
+const route = useRoute();
+const chatting = ref(route.query.chatee != null ? true : false);
+const chatee = ref(parseInt(route.query.chatee as string) || 0);
+const avatar = ref(route.query.avatar as string || '');
+const name = ref(route.query.name as string || '');
 </script>
 
 <template>

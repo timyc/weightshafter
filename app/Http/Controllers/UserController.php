@@ -44,6 +44,10 @@ class UserController extends Controller
 
     public function searchUsersByName(Request $request) {
         $users = User::where('name', 'like', '%' . $request->name . '%')->limit(10)->get();
+        //remove self from the results
+        $users = $users->filter(function ($user) use ($request) {
+            return $user->id != $request->user()->id;
+        });
         return response()->json($users);
     }
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onUpdated } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 let delay = (() => {
     let timer = 0;
@@ -8,6 +9,7 @@ let delay = (() => {
         timer = window.setTimeout(callback.bind(that), ms);
     };
 })();
+let router = useRouter();
 let query = ref('');
 let results = ref([] as any[]);
 let canSearch = ref(true);
@@ -42,7 +44,7 @@ onUpdated(() => {
     <div class="app-layout m-auto">
         <div class="main-container">
             <div class="search-list">
-                <el-card class="person-card" v-for="person of results" :key="person.id">
+                <el-card class="person-card" v-for="person of results" :key="person.id" @click="router.push(`/people?chatee=${person.id}&avatar=${person.avatar}&name=${person.name}`)">
                     <div class="user-info">
                         <el-row :gutter="10">
                             <el-col :span="8">
