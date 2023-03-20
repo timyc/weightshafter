@@ -12,7 +12,7 @@ export default{
         return {
             ht:0,
             wt:0,
-            foodList: [['', 0]],
+            foodList: [['', 0]] as [string, number][],
         };
      },
 
@@ -29,39 +29,31 @@ export default{
         },
 
         getFoodList(uc) {
-            //[Math.floor(uc-1), Math.ceil(uc+1)]
-            var calStr = Math.floor(uc-30) + '-' + Math.ceil(uc+30);
-            // var calStr = 255 + '-' + 267;
-            axios
-                .get('https://api.edamam.com/api/food-database/v2/parser', {
-                    params: {
-                        app_id: '7b3ffbde',
-                        app_key: 'c52858e7b9b21ef870e285d24051ecb1',
-                        calories: calStr,
-                        category: 'generic-meals',
-                    }
-                })
-                .then(response => {
-                    //this.foodList = response.data.hints;//.hints.label;
-                    // for (var i of response.data) {
-                    //     console.log(i)
-                    // }
-                    // console.log(response.data.hints);
-                    // console.log("XXTEST");
-                    // this.foodList = []
-                    for (var i of response.data.hints) {
-                        // console.log(i.food.label);
-                        this.foodList.push([i.food.label, i.food.nutrients.ENERC_KCAL])
-                    }
-                    // console.log("TTTEST");
-                })
-                .catch(() => {
-                    this.foodList = [['Error', -1]];
-                });
-            // console.log("TEST::FOODLIST::");
-            // console.log(this.foodList);
-            // console.log("ENDTEST::FOODLIST::");
-        }
+    var calStr = Math.floor(uc - 30) + '-' + Math.ceil(uc + 30);
+    axios
+        .get('https://api.edamam.com/api/food-database/v2/parser', {
+            params: {
+                app_id: '7b3ffbde',
+                app_key: 'c52858e7b9b21ef870e285d24051ecb1',
+                calories: calStr,
+                category: 'generic-meals',
+            }
+        })
+        .then(response => {
+            let tempList: [string, number][] = [];
+            for (var i of response.data.hints) {
+                tempList.push([i.food.label, i.food.nutrients.ENERC_KCAL]);
+            }
+            // Sort the list by descending calorie values
+            tempList.sort((a, b) => b[1] - a[1]);
+            // Update the foodList
+            this.foodList = tempList;
+        })
+        .catch(() => {
+            this.foodList = [['Error', -1]];
+        });
+}
+
     }
  };
  
