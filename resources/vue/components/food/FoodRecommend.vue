@@ -142,10 +142,14 @@ function getUserCalories(ht, wt) {
      <div>
         <!-- <button @click="getUserCalories();">hello</button> -->
         <p>{{ getUserHeightAndWeight() }}</p>
-        <p>Your optimal calorie intake for this meal: {{ getUserCalories(ht, wt) }}</p>
-        <p>Your height: {{ ht }} m</p>
-        <p>Your weight: {{ wt }} kg</p>
-        <button @click="getFoodList(getUserCalories(ht, wt));">GetFoodRecommendation</button>
+        <div class="container">
+        <p class="user-info">Your optimal calorie intake for this meal: <span>{{ getUserCalories(ht, wt) }}</span></p>
+        <p class="user-info">Your height: <span>{{ ht }} m</span></p>
+        <p class="user-info">Your weight: <span>{{ wt }} kg</span></p>
+        </div>
+        <div class="button-container">
+        <button @click="getFoodList(getUserCalories(ht, wt));">View example meals</button>
+        </div>
         <!-- <p>{{getFoodList(getUserCalories(ht, wt))}}</p> -->
         <ul>
             <li v-for="food in foodList">
@@ -161,5 +165,65 @@ function getUserCalories(ht, wt) {
      </div>
  </template>
  
+ <style>
+ body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f5f5f5;
+ }
+ 
+ .container {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     max-width: 480px;
+     margin: 0 auto;
+     padding: 1rem;
+ }
+ 
+ button {
+    background-color: #215248;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 12px 28px;
+}
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+ 
+ ul {
+     list-style-type: none;
+     padding: 0;
+ }
+ 
+ li {
+     background-color: #ffffff;
+     border-radius: 4px;
+     padding: 12px;
+     margin-bottom: 8px;
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .user-info {
+     font-size: 18px;
+     color: #333;
+     margin: 5px 0;
+ }
+ 
+ .user-info span {
+     font-weight: bold;
+ }
+ </style>
 
