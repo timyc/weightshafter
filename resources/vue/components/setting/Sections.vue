@@ -85,6 +85,7 @@ export default {
       this.tableData[7] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
       this.tableData[8] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
       this.tableData[9] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.num.count = 0;
     }
     /*
     yo(){
