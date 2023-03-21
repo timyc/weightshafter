@@ -18,37 +18,82 @@ export default {
         email: '' as string,
         height: '' as string,
         weight: '' as string,
-        date: '' as string
+        date: '' as string,
       },
       tableData: [{
-        date: '2023-01-01',
-        user: 'shaq',
-        height: '175',
-        weight: '71'
-      }, {
-        date: '2023-01-02',
-        user: 'shaq',
-        height: '175',
-        weight: '72'
-      }, {
-        date: '2023-01-03',
-        user: 'shaq',
-        height: '175',
-        weight: '73'
-      }, {
-        date: '2023-01-04',
-        user: 'shaq',
-        height: '175',
-        weight: '74'
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
+      },{
+        height: '',
+        weight: '',
+        date: ''
       }],
-    }
+      num:{
+        count: 0
+      }
+    };
   },
   methods: {
-    submit(){
-      console.log('submit')
+    add(ht: string, wt: string, dt: string){
+      if (this.num.count < 10){
+        this.tableData[this.num.count] = Object.assign({}, this.tableData[this.num.count], {height:ht, weight:wt, date:dt});
+        this.num.count++;
+      }
+      console.log(this.tableData)
+    },
+    clear(){
+      this.tableData[0] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[1] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[2] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[3] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[4] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[5] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[6] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[7] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[8] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
+      this.tableData[9] = Object.assign({}, this.tableData[0], {height:'', weight:'', date:''});
     }
+    /*
+    yo(){
+      this.tableData = Object.assign({}, this.tableData, {height:10, weight:20});
+      console.log(this.tableData);
+    }
+    */
   }
-}
+};
 </script>
 
 <template>
@@ -69,13 +114,14 @@ export default {
           <el-input clearable v-model="info.date" placeholder="input date"></el-input>
         </el-form-item>
         <el-form-item style="margin-left: 0px">
-          <el-button type="primary" icon="el-icon-submit"> SUBMIT </el-button>
+          <el-button type="primary" icon="el-icon-submit" @click="add(info.height, info.weight, info.date)"> SUBMIT </el-button>
+          <el-button type="primary" icon="el-icon-clear" @click="clear()"> CLEAR </el-button>
         </el-form-item>
       </el-form>
       <el-table
         :data="tableData"
         border
-        style="width: 100%; height: 400px">
+        style="width: 100%; height: 500px">
         <el-table-column
           prop="date"
           label="date">
@@ -83,12 +129,10 @@ export default {
         <el-table-column
           prop="height"
           label="height">
-          <!-- el-input clearable v-model="formInline.height" placeholder="height" --><!-- /el-input -->
         </el-table-column>
         <el-table-column
           prop="weight"
           label="weight">
-          <!-- el-input clearable v-model="formInline.weight" placeholder="weight" --><!-- /el-input -->
         </el-table-column>
       </el-table>
     </el-card>
