@@ -51,7 +51,6 @@ export default {
 }
 </script>
 
-
 <template>
   <div>
     <el-breadcrumb separator="/" style="padding-left: 0px;padding-bottom: 30px;font-size: 20px">
